@@ -22,9 +22,9 @@ async def getGithubMerged():
     try:
         response = requests.get(url)
         json_data = json.loads(response.text)
-        titles = []
+        titles = ()
         for item in json_data['items']:
-            titles.append(item["title"])
+            titles = titles + item
         return titles
     except:
         return "github Api failed"
@@ -52,19 +52,22 @@ async def getJiraIssues():
     }
 
     issues = []
+    jql = ""
     titles = await getGithubMerged()
+
     try:
         if len(titles) > 0:
             for items in titles:
-                url = "{}/{}".format(baseUrl, items)
-                response = requests.get(
-                    url, headers=headers, auth=auth, params=params)
-                if (response.status_code == 200):
-                    json_data = json.loads(response.text)
-                    issues.append({
-                        "title": json_data["key"],
-                        "status": json_data["fields"]["status"]["name"]
-                    })
+                x = jwl.joi
+                # url = "{}/{}".format(baseUrl, items)
+                # response = requests.get(
+                #     url, headers=headers, auth=auth, params=params)
+                # if (response.status_code == 200):
+                #     json_data = json.loads(response.text)
+                #     issues.append({
+                #         "title": json_data["key"],
+                #         "status": json_data["fields"]["status"]["name"]
+                #     })
         else:
             return ("no issues")
     except:
@@ -156,7 +159,7 @@ async def postTeams():
 
 async def main():
     # print(await postTeams())
-    print(await(getJiraIssues()))
+    print(await(getGithubMerged()))
 
 
 asyncio.run(main())

@@ -7,8 +7,8 @@ on:
     #     required: true
     #     default: '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'
     #     type: string
-    branches:
-      - main
+    # branches:
+    #   - main
 jobs:
   flutter_build:
     runs-on: ubuntu-latest
@@ -24,6 +24,7 @@ jobs:
       - run: flutter pub get
       - run: flutter test
       - run: flutter build apk
+      - run: flutter build appbundle
     
   # post_issues_on_Teams:
   #   runs-on: ubuntu-latest
