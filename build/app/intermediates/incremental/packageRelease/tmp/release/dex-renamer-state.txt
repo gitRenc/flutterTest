@@ -1,0 +1,4 @@
+#Tue Jan 31 00:57:37 CST 2023
+base.0=D\:\\projects\\Gilang\\flutter_test1\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
