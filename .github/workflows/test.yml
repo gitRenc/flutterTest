@@ -24,6 +24,7 @@ jobs:
       - run: flutter pub get
       - run: flutter test
       - run: flutter build apk
+      - run: flutter build appbundle
     
   # post_issues_on_Teams:
   #   runs-on: ubuntu-latest
