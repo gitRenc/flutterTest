@@ -11,4 +11,4 @@ jobs:
         id: test1
       - run: python .github/workflows/test2.py
         env: 
-          LINK : ${{ steps.test1.outputs }}
+          LINK : ${{ steps.test1.outputs.link }}
