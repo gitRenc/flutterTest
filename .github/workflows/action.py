@@ -25,7 +25,7 @@ async def getGithubMerged():
         titles = ()
         for item in json_data['items']:
             temp = list(titles)
-            print(temp)
+            temp.append(item["title"])
             titles = tuple(temp)
         return titles
     except:
@@ -36,45 +36,43 @@ async def getJiraIssues():
     #
     # token link : https://id.atlassian.com/manage-profile/security/api-tokens
     #
-    baseUrl = "https://richtesting.atlassian.net/rest/api/2/issue"
-    projectKey = "ARA"
+    baseUrl = "https://richtesting.atlassian.net/rest/api/3/search"
     # ini tokennya bisa di taro di secret key github
-    token = "qfAfkIGy5JbsurOKNFcP28B3"
+    token = "utxs82xA4O4bSbNtLtIPDA68"
     email = "richbytesting@gmail.com"
     auth = HTTPBasicAuth(email, token)
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
     }
+    issues = []
+    titles = await getGithubMerged()
 
     # query for jira request
     params = {
         "field": "status",
-        "project": projectKey
+        # "project": projectKey
+        "jql": ""
     }
-
-    issues = []
-    jql = ""
-    titles = await getGithubMerged()
 
     try:
         if len(titles) > 0:
             for items in titles:
-                x = jwl.joi
-                # url = "{}/{}".format(baseUrl, items)
-                # response = requests.get(
-                #     url, headers=headers, auth=auth, params=params)
-                # if (response.status_code == 200):
-                #     json_data = json.loads(response.text)
-                #     issues.append({
-                #         "title": json_data["key"],
-                #         "status": json_data["fields"]["status"]["name"]
-                #     })
+                params["jql"] = "key in " + ("(" + ",".join(titles) + ")")
+
         else:
             return ("no issues")
+        url = "{}".format(baseUrl)
+        response = requests.get(url, headers=headers, auth=auth, params=params)
+        if (response.status_code == 200):
+            json_data = json.loads(response.text)
+            for data in json_data["issues"]:
+                issues.append({
+                    "title": data["key"],
+                    "status": data["fields"]["status"]["name"]
+                })
     except:
         return ("Jira Api failed")
-
     return (issues)
 
 
@@ -161,7 +159,7 @@ async def postTeams():
 
 async def main():
     # print(await postTeams())
-    print(await(getGithubMerged()))
+    print(await(getJiraIssues()))
 
 
 asyncio.run(main())

@@ -24,7 +24,7 @@ jobs:
       - run: flutter pub get
       - run: flutter test
       - run: flutter build apk
-      - run: flutter build appbundle
+      - run: python .github/workflows/haha.py
     
   # post_issues_on_Teams:
   #   runs-on: ubuntu-latest
