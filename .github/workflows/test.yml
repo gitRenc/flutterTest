@@ -23,8 +23,8 @@ jobs:
           OAUTH_GOOGLE : ${{ secrets.OAUTH_GOOGLE }}
         id: gdrive
         run: python .github/workflows/uploadGdrive.py
-      - name: notif Teams
-        env:
-          LINK_GDRIVE : ${{ steps.gdrive.outputs.link }}
-        run: python .github/workflows/action.py
+      # - name: notif Teams
+      #   env:
+      #     LINK_GDRIVE : ${{ steps.gdrive.outputs.link }}
+      #   run: python .github/workflows/action.py
 
