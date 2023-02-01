@@ -5,12 +5,12 @@ headers = {
     "Authorization": "Bearer ya29.a0AVvZVsp96EcPXS2tNEym45jPROX9dZiZnZrDernfk5eFm3bpHRzt_7a6Ybwdwjgsic4Q5qMhb5Vw4Mc9ZPTYV1wvgNmJ0uVTy5xUPJp6QDOrNERBEY19IL9GTvZdFC0nF65-TpDsiohczro1eRUaDidFHXPYaCgYKAbsSARISFQGbdwaIfTw4I6gcnzd9itcs8U3YNg0163"
 }
 params = {
-    "name": "testz1231asdasdas2z",
-    "mimeType": "text/plain"
+    "name": "test_apk",
+    "mimeType": "application/vnd.android.package-archive"
 }
 files = {
     "data": ("metadata", json.dumps(params), "application/json;charset=UTF-8"),
-    "file": open("./test.txt", "rb")
+    "file": open("build/app/outputs/flutter-apk/app-release.apk", "rb")
 }
 
 response = requests.post(
