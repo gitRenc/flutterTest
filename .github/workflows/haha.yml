@@ -7,8 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: python test1.py
+      - run: python .github/workflows/test1.py
         id: test1
-      - run: python test2.py
+      - run: python .github/workflows/test2.py
         env: 
           LINK : ${{ steps.test1.outputs }}
