@@ -24,11 +24,15 @@ jobs:
       - run: flutter pub get
       - run: flutter test
       - run: flutter build apk
-      - name: upload APK to G Drive
+      - name: upload APK to Google Drive
         env:
           OAUTH_GOOGLE : ${{ secrets.OAUTH_GOOGLE }}
+        id: gdrive
         run: python .github/workflows/uploadGdrive.py
-    
+      - name: notif Teams
+        env:
+          LINK_GDRIVE : ${{ steps.gdrive.outputs }}
+        run: action.py
   # post_issues_on_Teams:
   #   runs-on: ubuntu-latest
   #   steps:

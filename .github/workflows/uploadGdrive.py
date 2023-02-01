@@ -18,4 +18,10 @@ files = {
 response = requests.post(
     "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart", headers=headers, files=files)
 
-print(response.text)
+
+json_data = json.loads(response.text)
+link = 'https://drive.google.com/file/d/{}/view'.format(json_data["id"])
+print(link)
+
+with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
+    print(f'link={link}', file=fh)

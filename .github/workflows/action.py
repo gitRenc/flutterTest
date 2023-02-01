@@ -37,8 +37,7 @@ async def getJiraIssues():
     # token link : https://id.atlassian.com/manage-profile/security/api-tokens
     #
     baseUrl = "https://richtesting.atlassian.net/rest/api/3/search"
-    # ini tokennya bisa di taro di secret key github
-    token = "utxs82xA4O4bSbNtLtIPDA68"
+    token = os.environ.get("JIRA_TOKEN")
     email = "richbytesting@gmail.com"
     auth = HTTPBasicAuth(email, token)
     headers = {
