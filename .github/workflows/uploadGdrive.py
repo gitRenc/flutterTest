@@ -3,6 +3,7 @@ import requests
 import os
 
 token = os.environ.get("OAUTH_GOOGLE")
+print(token)
 headers = {
     "Authorization": "Bearer {}".format(token)
 }
