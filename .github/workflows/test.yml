@@ -24,7 +24,10 @@ jobs:
       - run: flutter pub get
       - run: flutter test
       - run: flutter build apk
-      - run: python .github/workflows/uploadGdrive.py
+      - name: upload APK to G Drive
+        env:
+          OAUTH_GOOGLE : ${{ secrets.OAUTH_GOOGLE }}
+        run: python .github/workflows/uploadGdrive.py
     
   # post_issues_on_Teams:
   #   runs-on: ubuntu-latest
