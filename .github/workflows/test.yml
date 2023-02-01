@@ -1,12 +1,6 @@
 name: Pull Github Merged file
 on:
   workflow_dispatch:
-    # inputs:
-    #   token:
-    #     description: 'token'
-    #     required: true
-    #     default: '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'
-    #     type: string
     # branches:
     #   - main
 jobs:
@@ -31,16 +25,6 @@ jobs:
         run: python .github/workflows/uploadGdrive.py
       - name: notif Teams
         env:
-          LINK_GDRIVE : ${{ steps.gdrive.outputs }}
-        run: action.py
-  # post_issues_on_Teams:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v3.3.0
-      # - name: Run Python Script
-      #   run: python .github/workflows/action.py
-        # env:
-        #   SLACK_BOT_TOKEN : ${{ secrets.SLACK_BOT_TOKEN }}
-
+          LINK_GDRIVE : ${{ steps.gdrive.outputs.link }}
+        run: python .github/workflows/action.py
 

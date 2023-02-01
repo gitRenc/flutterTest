@@ -87,6 +87,7 @@ async def postTeams():
     endDate = datetime.now(timezone.utc)
     startDateFormated = startDate.strftime("%Y-%m-%d")
     endDateFormated = endDate.strftime("%Y-%m-%d")
+    link = os.environ.get("LINK_GDRIVE")
     if (len(issues) > 0):
         for x in issues:
             x = "- {} - {}\n".format(x["title"], x["status"])
@@ -137,8 +138,18 @@ async def postTeams():
                         },
                         {
                             "type": "TextBlock",
-                            "text": "latest build : halo",
+                            "text": "latest build : ",
                             "wrap": "true"
+                        },
+                        {
+                            "type": "ActionSet",
+                            "actions": [
+                                {
+                                    "type": "Action.OpenUrl",
+                                    "title": "Download Build File",
+                                    "value": "{}".format(link)
+                                }
+                            ]
                         }
                     ],
                     "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
@@ -150,6 +161,7 @@ async def postTeams():
     try:
         response = requests.post(url, headers=headers, json=content)
         print(response)
+        print("link")
     except:
         print("teams api failed")
 
