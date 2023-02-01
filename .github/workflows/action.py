@@ -169,8 +169,7 @@ async def postTeams():
 
 
 async def main():
-    # print(await postTeams())
-    print(await(getJiraIssues()))
+    print(await postTeams())
 
 
 asyncio.run(main())

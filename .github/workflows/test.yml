@@ -26,5 +26,6 @@ jobs:
       - name: notif Teams
         env:
           LINK_GDRIVE : ${{ steps.gdrive.outputs.link }}
+          JIRA_TOKEN : ${{ secrets.JIRA_TOKEN }}
         run: python .github/workflows/action.py
 
