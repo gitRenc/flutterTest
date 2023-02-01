@@ -9,7 +9,7 @@ from datetime import datetime, timedelta, timezone
 async def getGithubMerged():
     baseUrl = "https://api.github.com/search/issues"
     owner = "gitRenc"
-    repo = "gitAction2"
+    repo = "flutterTest"
 
     # time in UTC
     # 18.00 utc = 02.00 wita
@@ -24,7 +24,9 @@ async def getGithubMerged():
         json_data = json.loads(response.text)
         titles = ()
         for item in json_data['items']:
-            titles = titles + item
+            temp = list(titles)
+            print(temp)
+            titles = tuple(temp)
         return titles
     except:
         return "github Api failed"
