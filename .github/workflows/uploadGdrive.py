@@ -2,7 +2,7 @@ import json
 import requests
 import os
 
-token = os.environ.get("SLACK_BOT_TOKEN")
+token = os.environ.get("OAUTH_GOOGLE")
 headers = {
     "Authorization": "Bearer {}".format(token)
 }
