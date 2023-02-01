@@ -89,9 +89,75 @@ async def postTeams():
     endDateFormated = endDate.strftime("%Y-%m-%d")
     link = os.environ.get("LINK_GDRIVE")
     if (len(issues) > 0):
-        for x in issues:
-            x = "- {} - {}\n".format(x["title"], x["status"])
-            issuesString += x
+        for issue in issues:
+            issue = "- {} - {}\n".format(issue["title"], issue["status"])
+            issuesString += issue
+    # content = {
+    #     "type": "message",
+    #     "attachments": [
+    #         {
+    #             "contentType": "application/vnd.microsoft.card.adaptive",
+    #             "content": {
+    #                 "type": "AdaptiveCard",
+    #                 "body": [
+    #                     {
+    #                         "type": "TextBlock",
+    #                         "size": "medium",
+    #                         "weight": "bolder",
+    #                         "text": "Jira Issues"
+    #                     },
+    #                     {
+    #                         "type": "ColumnSet",
+    #                         "columns": [
+    #                             {
+    #                                 "type": "Column",
+    #                                 "items": [
+    #                                     {
+    #                                         "type": "TextBlock",
+    #                                         "spacing": "None",
+    #                                         "text": "From : {}".format(startDateFormated),
+    #                                         "isSubtle": "true",
+    #                                         "wrap": "true"
+    #                                     },
+    #                                     {
+    #                                         "type": "TextBlock",
+    #                                         "spacing": "None",
+    #                                         "text": "To: {}".format(endDateFormated),
+    #                                         "isSubtle": "true",
+    #                                         "wrap": "true"
+    #                                     }
+    #                                 ],
+    #                                 "width": "stretch"
+    #                             }
+    #                         ]
+    #                     },
+    #                     {
+    #                         "type": "TextBlock",
+    #                         "text": "{}".format(issuesString),
+    #                         "wrap": "true"
+    #                     },
+    #                     {
+    #                         "type": "TextBlock",
+    #                         "text": "latest build : ",
+    #                         "wrap": "true"
+    #                     },
+    #                     {
+    #                         "type": "ActionSet",
+    #                         "actions": [
+    #                             {
+    #                                 "type": "Action.OpenUrl",
+    #                                 "title": "Download Build File",
+    #                                 "value": "{}".format(link)
+    #                             }
+    #                         ]
+    #                     }
+    #                 ],
+    #                 "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    #                 "version": "1.5"
+    #             }
+    #         }
+    #     ]
+    # }
     content = {
         "type": "message",
         "attachments": [
@@ -99,6 +165,8 @@ async def postTeams():
                 "contentType": "application/vnd.microsoft.card.adaptive",
                 "content": {
                     "type": "AdaptiveCard",
+                    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                    "version": "1.4",
                     "body": [
                         {
                             "type": "TextBlock",
@@ -138,7 +206,7 @@ async def postTeams():
                         },
                         {
                             "type": "TextBlock",
-                            "text": "latest build : ",
+                            "text": "latest build :",
                             "wrap": "true"
                         },
                         {
@@ -147,13 +215,12 @@ async def postTeams():
                                 {
                                     "type": "Action.OpenUrl",
                                     "title": "Download Build File",
-                                    "value": "{}".format(link)
+                                    "url": "{}".format(link),
+                                    "iconUrl": "https://cdn-icons-png.flaticon.com/512/5332/5332713.png"
                                 }
                             ]
                         }
-                    ],
-                    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-                    "version": "1.5"
+                    ]
                 }
             }
         ]

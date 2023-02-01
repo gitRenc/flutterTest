@@ -22,7 +22,6 @@ response = requests.post(
 
 json_data = json.loads(response.text)
 link = 'https://drive.google.com/file/d/{}/view'.format(json_data["id"])
-print(json_data["id"])
 
 with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
     print(f'link={link}', file=fh)
