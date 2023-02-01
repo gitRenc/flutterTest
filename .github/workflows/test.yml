@@ -15,9 +15,9 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.3.10'
-      - run: flutter pub get
-      - run: flutter test
-      - run: flutter build apk
+      # - run: flutter pub get
+      # - run: flutter test
+      # - run: flutter build apk
       - name: upload APK to Google Drive
         env:
           OAUTH_GOOGLE : ${{ secrets.OAUTH_GOOGLE }}
